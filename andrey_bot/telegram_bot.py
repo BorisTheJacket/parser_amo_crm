@@ -196,68 +196,6 @@ async def e_mail_taker(message: types.Message):
             await bot.send_document(message.chat.id, misc)
         
 
-        
-
-# @dp.message_handler(content_types=['text'])
-# async def get_text_messages(message: types.Message):
-#     if message.text == 'стоп':
-#         await message.reply('Отправил на данные на обработку. Скоро пришлю эксель файл.')
-#         # for item in list_of_dicts_bot:
-#         #     db.set(item['Имя'], item['E-mail'].split())
-#         for mail_list in list_of_dicts_bot['E-mail'].split():
-        
-#             api = Api()
-
-#             for mail in mail_list:
-#                 data_dict = {}
-
-#                 resp = api.get_contacts_by_email(mail)
-                
-#                 if len(resp) == 0:
-#                     print("Не нашёл e-mail: ", mail)
-#                     continue
-
-#                 for contact in resp:
-                    
-#                     lead_id = api.get_contact_links(contact.get_id())
-                    
-#                     if lead_id.is_empty():
-#                         continue 
-
-#                     lead = api.get_lead(lead_id.get_first_lead_id())
-
-#                     lead_custom_fields = lead.get_custom_fields()
-
-#                     data_dict['Менеджер'] = lead.get_responsable()
-#                     data_dict['Ссылка на сделку'] = lead.get_lead_url()
-#                     data_dict['Дата заявки'] = lead.get_creation_date()
-#                     data_dict['Дата оплаты'] = lead.get_closed_date()
-#                     if lead_custom_fields.is_exist('Осталось оплатить'):
-#                         data_dict['Стоимость курса'] = lead.get_price() + lead.get_custom_fields().get_value('Осталось оплатить')
-#                     else:
-#                         data_dict['Стоимость курса'] = lead.get_price()
-#                     data_dict['Приход ДС'] = ''
-#                     status = lead.get_custom_fields().get_value('Способ оплаты')
-#                     status_tip_oplaty = lead.get_custom_fields().get_value('Тип оплаты')
-#                     if status in list_of_statuses:
-#                         data_dict['Статус'] = 'Брокер'
-#                     else:
-#                         data_dict['Статус'] = status_tip_oplaty
-#                     if lead.get_custom_fields().is_exist('Осталось оплатить'):
-#                         data_dict['К доплате'] = lead.get_custom_fields().get_value('Осталось оплатить')
-#                     else:
-#                         data_dict['К доплате'] = 0
-
-#                     list_of_dicts.append(data_dict)
-
-#                 df = DataFrame(list_of_dicts)
-#                 df.to_excel('Отчет.xlsx', sheet_name="sheet2", index=False)
-
-#         with open('Отчет.xlsx', 'rb') as misc:
-#             f = misc.read()
-#         bot.send_document(message.chat.id, f)
-        
-
 if __name__ == '__main__':
     executor.start_polling(dp)
     
